@@ -1,0 +1,41 @@
+@model IEnumerable<ProductCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Product</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No products have been added yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@product.Id">Details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
